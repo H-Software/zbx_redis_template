@@ -67,10 +67,11 @@ def _recv_all(sock, count):
 
 
 
-if len(sys.argv) <= 2:
+if len(sys.argv) <= 3:
 	host = (len(sys.argv) >= 2) and sys.argv[1] or hostname
+        port = (len(sys.argv) >= 3) and sys.argv[2] or redis_port
 
-	client = redis.StrictRedis(host=host, port=redis_port)
+	client = redis.StrictRedis(host=host, port=port)
 	server_info = client.info()
 
 	a = []
@@ -90,8 +91,9 @@ else:
 	host = (len(sys.argv) >= 2) and sys.argv[1] or 'localhost'
 	metric = (len(sys.argv) >= 3) and sys.argv[2]
 	db = (len(sys.argv) >= 4) and sys.argv[3] or 'none'
+        port = (len(sys.argv) >= 5) and sys.argv[4] or redis_port
 
-	client = redis.StrictRedis(host=host, port=redis_port)
+	client = redis.StrictRedis(host=host, port=port)
 	server_info = client.info()
 
 	if metric:
